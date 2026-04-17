@@ -1,0 +1,21 @@
+# Change log (append-only)
+
+## [2026-04-17] ingest | Repository structure
+- claims added: 0
+- entities updated: []
+- conflicts detected: []
+
+## [2026-04-17] ingest | E2E demo source
+- claims added: 3
+- entities updated: [ent_demowidget]
+- conflicts detected: []
+
+## [2026-04-17] ingest | DC Voltage Prediction based on CNN with Physics Information Embedding for MVDC Distribution Systems
+- claims added: 4
+- entities updated: [ent_sun_2024_dc_voltage_prediction_mvdc]
+- conflicts detected: []
+
+## [2026-04-17] ingest | A Physics-informed Neural Network Method for LC Parameter Estimation in Three-Phase Inverter
+- claims added: 5
+- entities updated: [ent_kong_2024_pinn_lc_parameter_estimation]
+- conflicts detected: []

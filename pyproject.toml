@@ -1,0 +1,19 @@
+[project]
+name = "compiled-wiki"
+version = "0.1.0"
+description = "CLI helpers for Compiled-Wiki: raw layout, IR validation, basic lint"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "jsonschema>=4.20.0",
+]
+
+[project.scripts]
+cw = "compiled_wiki.cli:main"
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]

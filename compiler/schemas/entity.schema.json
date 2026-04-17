@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://compiled-wiki.local/schemas/entity.json",
+  "title": "Entity",
+  "type": "object",
+  "required": ["id", "canonical_name", "aliases", "claim_ids"],
+  "properties": {
+    "id": { "type": "string", "description": "Stable slug (e.g. ent_acme_corp)" },
+    "canonical_name": { "type": "string" },
+    "aliases": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "claim_ids": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "wiki_path": {
+      "type": ["string", "null"],
+      "description": "Relative path under wiki/, e.g. entities/foo.md"
+    }
+  },
+  "additionalProperties": false
+}

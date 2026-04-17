@@ -1,0 +1,23 @@
+[
+  {
+    "id": "ent_demowidget",
+    "canonical_name": "DemoWidget",
+    "aliases": ["Demo Widget"],
+    "claim_ids": ["c_demo_001", "c_demo_002", "c_demo_003"],
+    "wiki_path": "entities/demowidget.md"
+  },
+  {
+    "id": "ent_sun_2024_dc_voltage_prediction_mvdc",
+    "canonical_name": "DC Voltage Prediction based on CNN with Physics Information Embedding for MVDC Distribution Systems",
+    "aliases": ["Sun et al. 2024 MVDC PECNN paper", "PECNN MVDC voltage prediction paper"],
+    "claim_ids": ["c_sun_2024_001", "c_sun_2024_002", "c_sun_2024_003", "c_sun_2024_004"],
+    "wiki_path": "entities/sun_2024_dc_voltage_prediction_mvdc.md"
+  },
+  {
+    "id": "ent_kong_2024_pinn_lc_parameter_estimation",
+    "canonical_name": "A Physics-informed Neural Network Method for LC Parameter Estimation in Three-Phase Inverter",
+    "aliases": ["Kong et al. 2024 LC parameter estimation paper", "PINN LC parameter estimation paper"],
+    "claim_ids": ["c_kong_2024_001", "c_kong_2024_002", "c_kong_2024_003", "c_kong_2024_004", "c_kong_2024_005"],
+    "wiki_path": "entities/kong_2024_pinn_lc_parameter_estimation.md"
+  }
+]

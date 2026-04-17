@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://compiled-wiki.local/schemas/claim.json",
+  "title": "Claim",
+  "type": "object",
+  "required": [
+    "id",
+    "subject",
+    "predicate",
+    "object",
+    "claim_type",
+    "source_id",
+    "status"
+  ],
+  "properties": {
+    "id": { "type": "string", "description": "Stable unique id (e.g. c_2026_001)" },
+    "subject": { "type": "string" },
+    "predicate": { "type": "string" },
+    "object": { "type": "string" },
+    "claim_type": {
+      "type": "string",
+      "enum": ["SourceFact", "Derived", "Inference", "Hypothesis"]
+    },
+    "source_id": { "type": "string", "description": "References material under raw/<source_id>/ or registered source slug" },
+    "evidence_span": {
+      "type": ["string", "null"],
+      "description": "Quote, section anchor, or locator in the source"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["supported", "disputed", "stale", "unknown"]
+    },
+    "entity_ids": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Linked entity ids"
+    },
+    "notes": { "type": ["string", "null"] }
+  },
+  "additionalProperties": false
+}
