@@ -242,12 +242,12 @@ cw ask "<question>" --limit 4
 | 测试问题 | 结果 | 观察 |
 |----------|------|------|
 | `PECNN 如何提升 MVDC 电压预测？` | 命中 4 条 `sun_2024_dc_voltage_prediction_mvdc` claims | 能展示 PECNN 的层结构、用途、物理关系嵌入和评估网络；引用链包含 claim id、evidence、raw 和 wiki 路径。 |
-| `How does PECNN improve MVDC voltage prediction?` | 命中 4 条 `sun_2024_dc_voltage_prediction_mvdc` claims | 英文问题命中稳定，检索质量明显好于同主题中文问法。 |
+| `How does PECNN improve MVDC voltage prediction?` | 命中 4 条 `sun_2024_dc_voltage_prediction_mvdc` claims | 英文问题命中稳定。 |
 | `PINN 估计了哪些参数，需要额外硬件吗？` | 命中 4 条 `kong_2024_pinn_lc_parameter_estimation` claims | 能回答估计 DC-link capacitance / AC-side inductance、不需要额外硬件，并带出方法和实验误差信息。 |
 | `Which parameters are estimated by PINN and is extra hardware required?` | 命中 4 条 `kong_2024_pinn_lc_parameter_estimation` claims | 英文问题命中稳定。 |
 | `What is the experimental maximum error for the three-phase inverter case?` | 命中 4 条 `kong_2024_pinn_lc_parameter_estimation` claims | 能检索到最大误差 claim（5.2% 和 14.7%）。 |
 | `DemoWidget standby power` | 命中 3 条 `sample_demo` claims | 英文关键词检索表现正常，能够优先返回 standby power，再返回同实体的相关 claims。 |
-| `三相逆变器实验误差是多少？` | 未命中 | 当前检索是轻量词面匹配，中文问题里的“实验误差”没有映射到英文 claim `experimental test -- shows_maximum_error`。 |
+| `三相逆变器实验误差是多少？` | 命中 4 条 `kong_2024_pinn_lc_parameter_estimation` claims | 中文问题可命中，依靠轻量双语 query 扩展可检索到 `5.2%` / `14.7%` 的误差 claim。 |
 
 输出示例（节选）：
 `cw ask "How does PECNN improve MVDC voltage prediction?" --limit 2`
@@ -275,15 +275,18 @@ LLM call failed (APIConnectionError): Connection error.
 `cw ask "三相逆变器实验误差是多少？" --limit 4`
 
 ```text
-No matching claims found in IR.
+Retrieved references:
+[1] c_kong_2024_004 | ... | source=kong_2024_pinn_lc_parameter_estimation
+[2] c_kong_2024_005 | ... | source=kong_2024_pinn_lc_parameter_estimation
 
-Answer: I could not find supported claims in the current wiki/IR for this question.
+Answer (LLM, deepseek/deepseek-chat):
+... maximum error is 5.2% for DC-link capacitance and 14.7% for AC-side inductance ...
 ```
 
 测试截图画廊见英文 README 的 **Test Screenshot Gallery**：  
 [README.md#test-screenshot-gallery](README.md#test-screenshot-gallery)
 
-结论：当前 CLI 可以用于测试 wiki/IR 的引用链是否清晰，适合验证“回答是否有来源”。测试集应默认包含英文查询（论文语料是英文），并保留中文查询用于回归跨语言能力。限制是检索层还比较朴素：跨语言同义词、中文问题到英文论文术语、以及更自然的答案组织都还需要加强。后续可以加入 query rewrite、BM25/embedding 混合检索，或把 `Retrieved references` 交给 DeepSeek / OpenAI 生成更自然的最终回答。
+结论：当前 CLI 可以用于测试 wiki/IR 的引用链是否清晰，适合验证“回答是否有来源”。测试集应默认包含英文查询（论文语料是英文），并保留中文查询用于回归跨语言能力。当前中文问法在常见术语上已可命中，但检索层仍偏轻量，长尾同义表达和更自然答案组织仍需持续增强。后续可以加入 query rewrite、BM25/embedding 混合检索，或把 `Retrieved references` 交给 DeepSeek / OpenAI 生成更自然的最终回答。
 
 ---
 
