@@ -68,13 +68,8 @@ Use the existing `rag` conda environment:
 ```bash
 source /Users/jiachongliu/anaconda3/etc/profile.d/conda.sh
 conda activate rag
-PYTHONPATH=src python -m compiled_wiki.cli info
-```
-
-Install as `cw` if desired:
-
-```bash
 pip install -e .
+cw info
 ```
 
 Common commands:
@@ -101,13 +96,13 @@ If LLM is configured but the API call fails, the command reports failure instead
 For deterministic local-only testing, run the command with `DEEPSEEK_API_KEY` unset in the current shell invocation.
 
 ```bash
-env -u DEEPSEEK_API_KEY PYTHONPATH=src python -m compiled_wiki.cli ask "DemoWidget standby power" --limit 2
+env -u DEEPSEEK_API_KEY cw ask "DemoWidget standby power" --limit 2
 ```
 
 Retrieval uses a built index at `ir/index.json` when available. Build or refresh it after IR updates:
 
 ```bash
-PYTHONPATH=src python -m compiled_wiki.cli index build --overwrite
+cw index build --overwrite
 ```
 
 Observed on 2026-04-17:
@@ -123,7 +118,7 @@ Observed on 2026-04-17:
 | `三相逆变器实验误差是多少？` | Hit 4 Kong et al. 2024 claims | Chinese query now works via lightweight bilingual query expansion and retrieves the `5.2%` / `14.7%` error claim |
 
 Example output (trimmed) for:
-`PYTHONPATH=src python -m compiled_wiki.cli ask "How does PECNN improve MVDC voltage prediction?" --limit 2`
+`cw ask "How does PECNN improve MVDC voltage prediction?" --limit 2`
 
 ```text
 Retrieved references:
@@ -138,14 +133,14 @@ Answer: Based on 2 retrieved claim(s):
 ```
 
 Example output (trimmed) for LLM configured but unavailable network/API:
-`PYTHONPATH=src python -m compiled_wiki.cli ask "Which parameters are estimated by PINN and is extra hardware required?" --limit 2`
+`cw ask "Which parameters are estimated by PINN and is extra hardware required?" --limit 2`
 
 ```text
 LLM call failed (APIConnectionError): Connection error.
 ```
 
 Example output (trimmed) for:
-`PYTHONPATH=src python -m compiled_wiki.cli ask "这个三相逆变器实验误差是多少？" --limit 4`
+`cw ask "这个三相逆变器实验误差是多少？" --limit 4`
 
 ```text
 Retrieved references:
@@ -182,4 +177,3 @@ Click any thumbnail to view the full-size screenshot.
     <td align="center"><a href="images/10.png"><img src="images/10.png" width="420" alt="Test screenshot 10"></a><br>Screenshot 10</td>
   </tr>
 </table>
-

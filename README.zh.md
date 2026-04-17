@@ -148,13 +148,8 @@ cw raw init my_paper_2024 --title "My paper"
 ```bash
 source /Users/jiachongliu/anaconda3/etc/profile.d/conda.sh
 conda activate rag
-PYTHONPATH=src python -m compiled_wiki.cli info
-```
-
-如果要安装成 `cw` 命令：
-
-```bash
 pip install -e .
+cw info
 ```
 
 ### 常用命令
@@ -215,13 +210,13 @@ DEEPSEEK_MODEL=deepseek-chat
 如果你要做可重复的“纯本地检索”测试，不改 `.env` 的情况下可以在当前命令里临时去掉 key：
 
 ```bash
-env -u DEEPSEEK_API_KEY PYTHONPATH=src python -m compiled_wiki.cli ask "DemoWidget standby power" --limit 2
+env -u DEEPSEEK_API_KEY cw ask "DemoWidget standby power" --limit 2
 ```
 
 检索会优先使用 `ir/index.json`。在 IR 更新后建议刷新索引：
 
 ```bash
-PYTHONPATH=src python -m compiled_wiki.cli index build --overwrite
+cw index build --overwrite
 ```
 
 ```bash
@@ -241,7 +236,7 @@ cw chat
 ```bash
 source /Users/jiachongliu/anaconda3/etc/profile.d/conda.sh
 conda activate rag
-PYTHONPATH=src python -m compiled_wiki.cli ask "<question>" --limit 4
+cw ask "<question>" --limit 4
 ```
 
 | 测试问题 | 结果 | 观察 |
@@ -255,7 +250,7 @@ PYTHONPATH=src python -m compiled_wiki.cli ask "<question>" --limit 4
 | `三相逆变器实验误差是多少？` | 未命中 | 当前检索是轻量词面匹配，中文问题里的“实验误差”没有映射到英文 claim `experimental test -- shows_maximum_error`。 |
 
 输出示例（节选）：
-`PYTHONPATH=src python -m compiled_wiki.cli ask "How does PECNN improve MVDC voltage prediction?" --limit 2`
+`cw ask "How does PECNN improve MVDC voltage prediction?" --limit 2`
 
 ```text
 Retrieved references:
@@ -270,14 +265,14 @@ Answer: Based on 2 retrieved claim(s):
 ```
 
 输出示例（节选）：
-`PYTHONPATH=src python -m compiled_wiki.cli ask "Which parameters are estimated by PINN and is extra hardware required?" --limit 2`
+`cw ask "Which parameters are estimated by PINN and is extra hardware required?" --limit 2`
 
 ```text
 LLM call failed (APIConnectionError): Connection error.
 ```
 
 输出示例（节选）：
-`PYTHONPATH=src python -m compiled_wiki.cli ask "三相逆变器实验误差是多少？" --limit 4`
+`cw ask "三相逆变器实验误差是多少？" --limit 4`
 
 ```text
 No matching claims found in IR.
